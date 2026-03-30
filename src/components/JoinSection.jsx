@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { 
-  CheckCircle, 
+  CheckCircle,
+  AlertCircle,
   Users, 
   TrendingDown, 
   Clock, 
@@ -26,6 +27,8 @@ const JoinSection = () => {
     volume: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const benefits = [
     {
@@ -57,11 +60,30 @@ const JoinSection = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Votre demande d\'adhésion a été envoyée avec succès !');
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'membership', ...formData }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ company: '', contact: '', email: '', phone: '', sector: '', volume: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Erreur envoi adhésion:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -153,6 +175,24 @@ const JoinSection = () => {
               <h3 className="text-2xl font-bold text-[#14243D] mb-6">
                 Formulaire d'adhésion
               </h3>
+
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
+                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                  <p className="text-green-700 text-sm">
+                    Votre demande d'adhésion a bien été envoyée ! Nous vous contacterons sous 48 à 72 heures.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
+                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+                  <p className="text-red-700 text-sm">
+                    Une erreur s'est produite. Veuillez réessayer ou nous contacter directement au +237 655 42 42 42.
+                  </p>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -277,10 +317,20 @@ const JoinSection = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-[#BFA046] hover:bg-[#a08a3a] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#BFA046] hover:bg-[#a08a3a] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {t('join.cta')}
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    <>
+                      {t('join.cta')}
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
