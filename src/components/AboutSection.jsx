@@ -2,6 +2,13 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Target, Users, Globe, Award, Lightbulb } from 'lucide-react';
 
+import flagCameroon from '../assets/flags/cameroon.png';
+import flagGabon from '../assets/flags/gabon.svg';
+import flagTchad from '../assets/flags/tchad.png';
+import flagRCA from '../assets/flags/rca.svg';
+import flagCongo from '../assets/flags/congo.png';
+import flagGuinee from '../assets/flags/guinee-equatoriale.svg';
+
 const AboutSection = () => {
   const { t } = useTranslation();
 
@@ -11,6 +18,15 @@ const AboutSection = () => {
     { icon: Users, key: 'solidarity' },
     { icon: Lightbulb, key: 'innovation' },
     { icon: Globe, key: 'local' }
+  ];
+
+  const countries = [
+    { name: 'Cameroun', flag: flagCameroon },
+    { name: 'Gabon', flag: flagGabon },
+    { name: 'Tchad', flag: flagTchad },
+    { name: 'RCA', flag: flagRCA },
+    { name: 'Congo', flag: flagCongo },
+    { name: 'Guinée Équatoriale', flag: flagGuinee },
   ];
 
   return (
@@ -115,17 +131,24 @@ const AboutSection = () => {
           </h3>
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {['Cameroun', 'Gabon', 'Tchad', 'RCA', 'Congo', 'Guinée Équatoriale'].map((country, index) => (
+              {countries.map((country, index) => (
                 <motion.div
-                  key={country}
+                  key={country.name}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center p-4 rounded-lg bg-gradient-to-br from-[#14243D] to-[#1a2f4a] text-white hover:scale-105 transition-transform duration-300"
+                  whileHover={{ scale: 1.08, y: -4 }}
+                  className="text-center p-4 rounded-xl bg-gradient-to-br from-[#14243D] to-[#1a2f4a] text-white hover:shadow-2xl transition-all duration-300 cursor-default group"
                 >
-                  <Globe className="h-8 w-8 mx-auto mb-2 text-[#BFA046]" />
-                  <p className="font-medium text-sm">{country}</p>
+                  <div className="w-16 h-10 mx-auto mb-3 rounded-md overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-300">
+                    <img
+                      src={country.flag}
+                      alt={`Drapeau ${country.name}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="font-medium text-sm leading-tight">{country.name}</p>
                 </motion.div>
               ))}
             </div>
