@@ -186,7 +186,7 @@ pnpm run lint
 **CENTRACHAT INTERNATIONAL**
 - **Adresse** : Avenue Rosa Park, Lieu-dit Ambassade des États-Unis, Yaoundé, Cameroun
 - **Téléphone** : +237 655 42 42 42
-- **Email** : foch@centrachat.africa
+- **Email** : contact@centrachat.africa
 - **WhatsApp** : +237 655 42 42 42
 
 ## 📄 Licence

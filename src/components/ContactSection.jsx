@@ -29,7 +29,7 @@ const ContactSection = () => {
       icon: Mail,
       title: 'Email',
       content: t('contact.email'),
-      link: 'mailto:foch@centrachat.africa'
+      link: 'mailto:contact@centrachat.africa'
     },
     {
       icon: Clock,

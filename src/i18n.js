@@ -79,7 +79,7 @@ const resources = {
       "contact.form.send": "Envoyer",
       "contact.address": "Avenue Rosa Park, Lieu-dit Ambassade des États-Unis, Yaoundé, Cameroun",
       "contact.phone": "+237 655 42 42 42",
-      "contact.email": "foch@centrachat.africa",
+      "contact.email": "contact@centrachat.africa",
       
       // Footer
       "footer.legal": "Mentions légales",
@@ -164,7 +164,7 @@ const resources = {
       "contact.form.send": "Send",
       "contact.address": "Avenue Rosa Park, US Embassy area, Yaoundé, Cameroon",
       "contact.phone": "+237 655 42 42 42",
-      "contact.email": "foch@centrachat.africa",
+      "contact.email": "contact@centrachat.africa",
       
       // Footer
       "footer.legal": "Legal notice",

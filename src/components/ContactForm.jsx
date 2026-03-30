@@ -177,10 +177,10 @@ const ContactForm = () => {
             +237 655 42 42 42
           </a>
           <a 
-            href="mailto:foch@centrachat.africa"
+            href="mailto:contact@centrachat.africa"
             className="text-[#BFA046] hover:text-[#a08a3a] transition-colors font-medium"
           >
-            foch@centrachat.africa
+            contact@centrachat.africa
           </a>
         </div>
       </div>
