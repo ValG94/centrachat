@@ -82,7 +82,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-[#BFA046] flex-shrink-0" />
                 <a 
-                  href="mailto:foch@centrachat.africa"
+                  href="mailto:contact@centrachat.africa"
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   {t('contact.email')}
